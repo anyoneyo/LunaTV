@@ -1927,6 +1927,14 @@ function PlayPageClient() {
         return;
       }
 
+      // ✅ 关键修复：如果正在换集，不要调用setVideoUrl，避免触发initPlayer
+      // 换集逻辑会自己处理URL更新
+      if (isEpisodeChangingRef.current) {
+        console.log('🎵 检测到换集中，仅更新音轨选择，不触发URL变更');
+        setCurrentAudioTrack(preferredTrack.index);
+        return;
+      }
+
       const targetUrl = appendAudioStreamIndex(activeUrl, preferredTrack.index);
       setCurrentAudioTrack(preferredTrack.index);
       if (targetUrl && targetUrl !== activeUrl) {
@@ -2003,7 +2011,7 @@ function PlayPageClient() {
     }
 
     processAudioTracks(rawTracks);
-  }, [currentEpisodeIndex, detail, resetAudioTrackState, videoUrl]);
+  }, [currentEpisodeIndex, detail, resetAudioTrackState]);
 
   // 处理音轨切换
   const handleAudioTrackSelect = async (track: typeof audioTracks[0]) => {
