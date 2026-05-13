@@ -11,6 +11,61 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: "6.6.0",
+    date: "2026-05-09",
+    added: [
+    "🔍 外部流量监控优化：过滤无效域名（0.0.0.0、localhost、内网IP）显示",
+    "📊 动态Cron阈值：基于实际用户数动态计算查询阈值",
+    "🔐 SSRF保护绕过：为私有部署添加DISABLE_SSRF_PROTECTION环境变量",
+    "🎯 剧集选择器：速度测试后自动按速度排序",
+    "⏱️ API缓存统一：统一所有API缓存时长为2小时"
+    ],
+    changed: [
+    "⚡ Cron性能优化：通过进程级缓存减少数据库查询94%（466→28-30查询）",
+    "🔧 Cron配置集中化：创建DEFAULT_CRON_CONFIG作为单一配置源",
+    "📉 Cron默认值优化：批处理大小降至50条，活跃窗口缩短至21天",
+    "🚀 TanStack Query迁移：YouTube和Bilibili搜索迁移到TanStack Query",
+    "📊 豆瓣/短剧页面优化：迁移到useInfiniteQuery + 虚拟滚动"
+    ],
+    fixed: [
+    "🐛 SSR错误完全修复：修复所有服务端渲染时访问浏览器API导致的崩溃（utils.ts、download-idb.ts、stream-saver.ts、AnimatedCardGrid.tsx、HomeClient.tsx、HeroBanner.tsx）",
+    "🔄 数据迁移增强：API读取时自动升级旧版用户数据字段",
+    "🎨 UI优化：播放按钮悬停改为轮廓样式，扩大控制栏悬停区域",
+    "📝 数据导入导出：修复提醒和视频源导入导出时缺失字段",
+    "🔍 追番更新修复：修复依赖查询加载逻辑和自动刷新功能",
+    "🔄 豆瓣无限加载修复：通过记忆化endReached回调防止无限加载"
+    ]
+  },
+  {
+    version: "6.5.3",
+    date: "2026-05-07",
+    added: [
+    "🛡️ SSRF保护集成：将SSRF保护集成到代理端点，增强安全性",
+    "🚀 持久化导航Shell：实现遵循Next.js最佳实践的持久化导航Shell",
+    "⚡ 路由优化：添加预取和加载状态的路由优化",
+    "🎯 请求去重和超时保护：添加请求去重和超时保护机制",
+    "🗂️ TanStack Query缓存优化：使用TanStack Query优化数据源浏览器缓存",
+    "🎨 剧集选择器增强：添加手动速度测试和状态徽章到剧集选择器"
+    ],
+    changed: [
+    "📦 依赖更新：更新依赖到最新版本",
+    "🔄 TanStack Query迁移：将数据获取和缓存迁移到TanStack Query",
+    "⚡ 导航优化：减少导航请求风暴并优化缓存"
+    ],
+    fixed: [
+    "🔄 追番更新功能完整还原：100%还原旧watching-updates.ts逻辑到TanStack Query实现，包括getOriginalEpisodes数据库重读、protectedTotalEpisodes保护机制、新上映检查、排序逻辑、localStorage持久化、CDN缓存绕过等所有功能",
+    "🔧 代理Tavily API使用查询：通过后端代理Tavily API使用查询以避免WAF阻止",
+    "🛡️ 改进Tavily使用API错误处理：改进WAF阻止的错误处理",
+    "🗄️ 启动时重建缺失的视频元数据：防止误删除，优先使用本地文件缓存",
+    "🎨 移动画质徽章位置：将画质徽章移到右下角，避免与当前源标签重叠",
+    "🖥️ 修复登录/注册页面全屏显示：使用fixed定位实现全屏显示，修复z-index问题",
+    "🔐 跳过认证页面的RouteWarmup：防止登录干扰",
+    "✅ 添加RouteWarmup认证检查：添加认证检查到RouteWarmup",
+    "🎬 修复路由过渡的加载回退：将CinematicLoadingFallback包装在fixed容器中",
+    "📱 添加play-stats页面底部内边距：为移动导航添加底部内边距，匹配admin页面模式"
+    ]
+  },
+  {
     version: "6.5.2",
     date: "2026-05-06",
     added: [
